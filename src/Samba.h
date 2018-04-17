@@ -68,6 +68,7 @@ public:
     std::string version();
 
     uint32_t chipId();
+    bool ignoreFlashSize();
 
     void setDebug(bool debug) { _debug = debug; }
 

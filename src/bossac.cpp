@@ -63,6 +63,7 @@ public:
     bool debug;
     bool help;
     bool forceUsb;
+    bool ignoreFlashSize;
     string forceUsbArg;
 
     int readArg;
@@ -189,6 +190,12 @@ static Option opts[] =
       'R', "reset", &config.reset,
       { ArgNone },
       "reset CPU (if supported)"
+    },
+    {
+      'I', "ignoreOverflow", &config.ignoreFlashSize,
+      { ArgNone },
+      "ignore if binary is bigger than internal flash\n"
+      "may be used to program external flash with contiguous address space)"
     }
 };
 
@@ -341,7 +348,7 @@ main(int argc, char* argv[])
         uint32_t chipId = samba.chipId();
         printf( "Atmel SMART device 0x%08x found\n", chipId ) ;
 
-        Flash::Ptr flash = flashFactory.create(samba, chipId);
+        Flash::Ptr flash = flashFactory.create(samba, chipId, config.ignoreFlashSize);
         if (flash.get() == NULL)
         {
             fprintf(stderr, "Flash for chip ID %08x is not supported\n", chipId);
