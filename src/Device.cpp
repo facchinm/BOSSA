@@ -46,7 +46,7 @@ Device::readChipId(uint32_t& chipId, uint32_t& extChipId)
 }
 
 void
-Device::create()
+Device::create(bool ignoreFlashSize)
 {
     Flash* flashPtr;
     uint32_t chipId = 0;
@@ -464,7 +464,7 @@ Device::create()
         case 0x1001000a: // E18A
         case 0x1001000f: // G18A WLCSP
             _family = FAMILY_SAMD21;
-            flashPtr = new D2xNvmFlash(_samba, "ATSAMD21x18", 4096, 64, 0x20004000, 0x20008000) ;
+            flashPtr = new D2xNvmFlash(_samba, "ATSAMD21x18", 4096, 64, 0x20004000, 0x20008000, ignoreFlashSize) ;
             break;
 
         //

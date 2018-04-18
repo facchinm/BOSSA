@@ -197,11 +197,11 @@ Command::flashable()
 }
 
 bool
-Command::createDevice()
+Command::createDevice(bool ignoreFlashSize)
 {
     try
     {
-        _device.create();
+        _device.create(ignoreFlashSize);
     }
     catch (DeviceUnsupportedError& e)
     {

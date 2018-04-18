@@ -82,7 +82,7 @@ public:
     Device(Samba& samba) : _samba(samba), _flash(nullptr), _family(FAMILY_NONE) {}
     virtual ~Device() {}
 
-    void create();
+    void create(bool ignoreFlashSize = false);
 
     Family getFamily() { return _family; }
 

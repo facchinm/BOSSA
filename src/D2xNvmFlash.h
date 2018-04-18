@@ -34,7 +34,8 @@ public:
         uint32_t pages,
         uint32_t size,
         uint32_t user,
-        uint32_t stack);
+        uint32_t stack,
+        bool ignoreFlashSize = false);
 
     virtual ~D2xNvmFlash();
 

@@ -66,6 +66,7 @@ public:
     bool help;
     bool usbPort;
     bool arduinoErase;
+    bool ignoreFlashSize;
 
     int readArg;
     int offsetArg;
@@ -94,6 +95,7 @@ BossaConfig::BossaConfig()
     help = false;
     usbPort = false;
     arduinoErase = false;
+    ignoreFlashSize = false;
 
     readArg = 0;
     offsetArg = 0;
@@ -254,6 +256,12 @@ static Option opts[] =
       "reset CPU (if supported)"
     },
     {
+      'I', "ignoreOverflow", &config.ignoreFlashSize,
+      { ArgNone },
+      "ignore if binary is bigger than internal flash\n"
+      "may be used to program external flash with contiguous address space)"
+    },
+    {
       'a', "arduino-erase", &config.arduinoErase,
       { ArgNone },
       "erase and reset via Arduino 1200 baud hack"
@@ -387,7 +395,7 @@ main(int argc, char* argv[])
         }
 
         Device device(samba);
-        device.create();
+        device.create(config.ignoreFlashSize);
 
         Device::FlashPtr& flash = device.getFlash();
 
