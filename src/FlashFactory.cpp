@@ -59,7 +59,7 @@ FlashFactory::create(Samba& samba, uint32_t chipId, bool ignoreFlashSize)
         break ;
 
     case ATSAMD21G18A_CHIPID:
-        flash = new NvmFlash( samba, ATSAMD21G18A_NAME, ATSAMD21G18A_FLASH_BASE, ignoreFlashSize ? UINT32_MAX : ATSAMD21G18A_FLASH_PAGES, ATSAMD21G18A_FLASH_PAGE_SIZE,
+        flash = new NvmFlash( samba, ATSAMD21G18A_NAME, ATSAMD21G18A_FLASH_BASE, ignoreFlashSize ? __UINT32_MAX__ : ATSAMD21G18A_FLASH_PAGES, ATSAMD21G18A_FLASH_PAGE_SIZE,
                               ATSAMD21G18A_FLASH_PLANES, ATSAMD21G18A_FLASH_LOCK_REGIONS,
                               ATSAMD21G18A_BUFFER_ADDR, ATSAMD21G18A_STACK_ADDR, ATSAMD21G18A_NVMCTRL_BASE, /*canBrownout*/true ) ;
         break ;
