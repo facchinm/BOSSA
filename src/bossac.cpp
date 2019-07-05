@@ -346,7 +346,14 @@ main(int argc, char* argv[])
         }
 
         uint32_t chipId = samba.chipId();
-        printf( "Atmel SMART device 0x%08x found\n", chipId ) ;
+        if (chipId == 0xffff0150)
+        {
+            printf( "Nordic device 0x%08x found\n", chipId & 0x0000ffff ) ;
+        }
+        else
+        {
+            printf( "Atmel SMART device 0x%08x found\n", chipId ) ;
+        }
 
         Flash::Ptr flash = flashFactory.create(samba, chipId, config.ignoreFlashSize);
         if (flash.get() == NULL)

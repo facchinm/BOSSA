@@ -135,6 +135,11 @@ Samba::init()
     if (_debug)
         printf("chipId=%#08x\n", cid);
 
+    if (cid == 0xffff0150) {
+        // Nordic nRF52840
+        return true;
+    }
+
     uint8_t eproc = (cid >> 5) & 0x7;
     uint8_t arch = (cid >> 20) & 0xff;
 
@@ -648,6 +653,8 @@ Samba::chipId()
     uint32_t cid = readWord(0x400e0740);
     if (cid == 0)
         cid = readWord(0x400e0940);
+    if (cid == 0)
+        cid = readWord(0x1000005c);
     return cid;
 }
 
@@ -664,6 +671,7 @@ Samba::reset(void)
     case ATSAMD21G18A_CHIPID:
     case ATSAMD21E18A_CHIPID:
     case ATSAMR21E18A_CHIPID:
+    case 0xffff0150: // Nordic
         // http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0484c/index.html
         writeWord(0xE000ED0C, 0x05FA0004);
         break;

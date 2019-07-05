@@ -33,6 +33,7 @@
 #include "EfcFlash.h"
 #include "EefcFlash.h"
 #include "NvmFlash.h"
+#include "NordicFlash.h"
 
 FlashFactory::FlashFactory()
 {
@@ -261,6 +262,10 @@ FlashFactory::create(Samba& samba, uint32_t chipId, bool ignoreFlashSize)
         break;
     case 0x329973a0 :
         flash = new EefcFlash(samba, "ATSAM9XE128", 0x200000, 256, 512, 1, 8, 0x300000, 0x303000, 0xfffffa00, true);
+        break;
+
+    case 0xffff0150 :
+        flash = new NordicFlash(samba, "nRF52840", 0x000000, 4096, 256, 1, 16, 0x00, 0x00);
         break;
 
     default:
