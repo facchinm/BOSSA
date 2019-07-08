@@ -265,7 +265,7 @@ FlashFactory::create(Samba& samba, uint32_t chipId, bool ignoreFlashSize)
         break;
 
     case 0xffff0150 :
-        flash = new NordicFlash(samba, "nRF52840", 0x000000, 4096, 256, 1, 16, 0x00, 0x00);
+        flash = new NordicFlash(samba, "nRF52840", 0x000000, 256, 4096, 1, 16, 0x00, 0x00);
         break;
 
     default:
